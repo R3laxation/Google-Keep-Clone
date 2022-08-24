@@ -11,47 +11,52 @@ import {
     LightbulbOutlined as LightBulb,
     NotificationsNoneOutlined as Reminder
 } from "@mui/icons-material";
+import {Link} from 'react-router-dom';
 
 
 export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType) => {
 
     const listItem = [
-        {id: 1, name: 'Заметки', icon: <LightBulb/>},
-        {id: 2, name: 'Напоминания', icon: <Reminder/>},
-        {id: 3, name: 'Изменение ярлыков', icon: <Edit/>},
-        {id: 4, name: 'Архив', icon: <Archive/>},
-        {id: 5, name: 'Корзина', icon: <Delete/>}]
+        {id: 1, name: 'Заметки', icon: <LightBulb/>, route: '/'},
+        {id: 2, name: 'Напоминания', icon: <Reminder/>, route: '/remind'},
+        {id: 3, name: 'Изменение ярлыков', icon: <Edit/>, route: '/edit'},
+        {id: 4, name: 'Архив', icon: <Archive/>, route: '/archive'},
+        {id: 5, name: 'Корзина', icon: <Delete/>, route: 'delete'}
+    ]
 
     const onMouseHandler = () => {
-        if(!buttonIsClicked) {
+        if (!buttonIsClicked) {
             handleDrawer()
         }
     }
 
     return (
         <div>
-            <List onMouseEnter={onMouseHandler} onMouseLeave={onMouseHandler} >
+            <List onMouseEnter={onMouseHandler} onMouseLeave={onMouseHandler}>
                 {
                     listItem.map((item) => (
-                        <ListItem key={item.id} disablePadding sx={{display: 'block'}} >
-                            <ListItemButton
-                                            sx={{
-                                                minHeight: 15,
-                                                justifyContent: open ? 'initial' : 'center',
-                                                px: 2.5,
-                                            }}
-                            >
-                                <ListItemIcon
+                        <ListItem key={item.id} disablePadding sx={{display: 'block'}}>
+                            <Link to={item.route} style={{textDecoration: 'none', display: 'flex', color: 'inherit'}}>
+                                <ListItemButton
                                     sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
+                                        minHeight: 15,
+                                        justifyContent: open ? 'initial' : 'center',
+                                        px: 2.5,
                                     }}
                                 >
-                                    {item.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={item.name} sx={{opacity: open ? 1 : 0}}/>
-                            </ListItemButton>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.name} sx={{opacity: open ? 1 : 0}}/>
+                                </ListItemButton>
+                            </Link>
                         </ListItem>
                     ))}
             </List>

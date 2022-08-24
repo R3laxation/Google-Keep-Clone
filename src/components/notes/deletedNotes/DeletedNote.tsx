@@ -1,7 +1,7 @@
 import {Card, CardActions, CardContent, styled, Typography} from '@mui/material';
 import React, { useContext } from 'react';
 import {NoteType} from "../addNoteForm/AddNoteForm";
-import {ArchiveOutlined as Archive, DeleteOutlined as Delete} from '@mui/icons-material';
+import {RestoreFromTrashOutlined as Restore, DeleteForeverOutlined as Delete} from '@mui/icons-material';
 import {DataContext} from "../../../context/DataProvider";
 
 
@@ -13,20 +13,19 @@ const StyledCard = styled(Card)`
   border-radius: 8px;
 `
 
-export const Note = ({note}: NotePropsType) => {
+export const DeletedNote = ({note}: NotePropsType) => {
 
-    const {setArchiveNotes, setDeletedNotes, notes, setNotes} = useContext(DataContext);
+    const {setArchiveNotes, setDeletedNotes, notes, setNotes, deletedNotes} = useContext(DataContext);
 
-    const archiveNote = (note: NoteType) => {
-        const updatedNotes = notes.filter((data) => data.id !== note.id);
-        setNotes(updatedNotes);
-        setArchiveNotes((prevArr) => [note, ...prevArr]);
+    const restoreNote = (note: NoteType) => {
+        const updatedNotes = deletedNotes.filter((data) => data.id !== note.id);
+        setDeletedNotes(updatedNotes);
+        setNotes((prevArr) => [note, ...prevArr]);
     }
 
     const deleteNote = (note: NoteType) => {
         const updatedNotes = notes.filter((data) => data.id !== note.id);
-        setNotes(updatedNotes);
-        setDeletedNotes((prevArr) => [note, ...prevArr]);
+        setDeletedNotes(updatedNotes);
     }
 
     return (
@@ -36,8 +35,8 @@ export const Note = ({note}: NotePropsType) => {
                 <Typography>{note.text}</Typography>
             </CardContent>
             <CardActions>
-                <Archive fontSize={"small"} style={{marginLeft: 'auto'}} onClick={() => archiveNote(note)}/>
-                <Delete fontSize={"small"} onClick={() => deleteNote(note)}/>
+                <Delete fontSize={"small"} onClick={() => deleteNote(note)} style={{marginLeft: 'auto'}} />
+                <Restore fontSize={"small"} onClick={() => restoreNote(note)}/>
             </CardActions>
         </StyledCard>
     );

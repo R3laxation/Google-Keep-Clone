@@ -1,7 +1,7 @@
 import {Card, CardActions, CardContent, styled, Typography} from '@mui/material';
 import React, { useContext } from 'react';
 import {NoteType} from "../addNoteForm/AddNoteForm";
-import {ArchiveOutlined as Archive, DeleteOutlined as Delete} from '@mui/icons-material';
+import {UnarchiveOutlined as Unarchive, DeleteOutlined as Delete} from '@mui/icons-material';
 import {DataContext} from "../../../context/DataProvider";
 
 
@@ -13,19 +13,19 @@ const StyledCard = styled(Card)`
   border-radius: 8px;
 `
 
-export const Note = ({note}: NotePropsType) => {
+export const ArchivedNote = ({note}: NotePropsType) => {
 
-    const {setArchiveNotes, setDeletedNotes, notes, setNotes} = useContext(DataContext);
+    const {setArchiveNotes, setDeletedNotes, notes, setNotes, archiveNotes} = useContext(DataContext);
 
-    const archiveNote = (note: NoteType) => {
-        const updatedNotes = notes.filter((data) => data.id !== note.id);
-        setNotes(updatedNotes);
-        setArchiveNotes((prevArr) => [note, ...prevArr]);
+    const unArchiveNote = (note: NoteType) => {
+        const updatedNotes = archiveNotes.filter((data) => data.id !== note.id);
+        setArchiveNotes(updatedNotes);
+        setNotes((prevArr) => [note, ...prevArr]);
     }
 
     const deleteNote = (note: NoteType) => {
         const updatedNotes = notes.filter((data) => data.id !== note.id);
-        setNotes(updatedNotes);
+        setArchiveNotes(updatedNotes);
         setDeletedNotes((prevArr) => [note, ...prevArr]);
     }
 
@@ -36,7 +36,7 @@ export const Note = ({note}: NotePropsType) => {
                 <Typography>{note.text}</Typography>
             </CardContent>
             <CardActions>
-                <Archive fontSize={"small"} style={{marginLeft: 'auto'}} onClick={() => archiveNote(note)}/>
+                <Unarchive fontSize={"small"} style={{marginLeft: 'auto'}} onClick={() => unArchiveNote(note)}/>
                 <Delete fontSize={"small"} onClick={() => deleteNote(note)}/>
             </CardActions>
         </StyledCard>
