@@ -9,7 +9,6 @@ export const DataProvider = ({children}: DataProviderPropsType) => {
     const [archiveNotes, setArchiveNotes] = useState([] as NoteType[]);
     const [deletedNotes, setDeletedNotes] = useState([] as NoteType[]);
 
-
     return(
         <DataContext.Provider value={{
             notes, setNotes, archiveNotes, setArchiveNotes, deletedNotes, setDeletedNotes

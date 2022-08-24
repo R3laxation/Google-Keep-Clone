@@ -14,7 +14,6 @@ const Container = styled(Box)`
   margin: auto;
   min-height: 20px;
 `
-
 const note = {
     id: '',
     title: '',
@@ -66,7 +65,6 @@ export const AddNoteForm = () => {
                 />
             </Container>
         </ClickAwayListener>
-
     );
 };
 
