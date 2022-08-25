@@ -15,17 +15,17 @@ const StyledCard = styled(Card)`
 
 export const ArchivedNote = ({note}: NotePropsType) => {
 
-    const {setArchiveNotes, setDeletedNotes, notes, setNotes, archiveNotes} = useContext(DataContext);
+    const {setArchivedNotes, setDeletedNotes, notes, setNotes, archivedNotes} = useContext(DataContext);
 
     const unArchiveNote = (note: NoteType) => {
-        const updatedNotes = archiveNotes.filter((data) => data.id !== note.id);
-        setArchiveNotes(updatedNotes);
+        const updatedNotes = archivedNotes.filter((data) => data.id !== note.id);
+        setArchivedNotes(updatedNotes);
         setNotes((prevArr) => [note, ...prevArr]);
     }
 
     const deleteNote = (note: NoteType) => {
         const updatedNotes = notes.filter((data) => data.id !== note.id);
-        setArchiveNotes(updatedNotes);
+        setArchivedNotes(updatedNotes);
         setDeletedNotes((prevArr) => [note, ...prevArr]);
     }
 

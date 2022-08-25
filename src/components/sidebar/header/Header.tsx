@@ -4,6 +4,7 @@ import * as React from 'react';
 import {Menu} from "@mui/icons-material";
 import {styled} from "@mui/material/styles";
 import logo from '../../../assets/google-keep-logo-0BC92EBBBD-seeklogo.com.png';
+import {SearchField} from "./SearchField";
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
@@ -43,6 +44,7 @@ export const Header = ({open, handleDrawer, clickedButtonHandler}: HeaderPropsTy
                 </IconButton>
                 <img src={logo} alt="logo" style={{width: '30px', marginRight: '20px' }}/>
                 <Title>Keep</Title>
+                <SearchField/>
             </Toolbar>
         </HeaderBar>
     )

@@ -22,7 +22,8 @@ const reorder = (list: any, startIndex: number, endIndex: number) => {
 
 export const Notes = () => {
 
-    const {notes, setNotes} = useContext(DataContext);
+    const {notes, archivedNotes, setNotes, searchValue} = useContext(DataContext);
+
 
     const onDragEnd = (result: any) => {
         if (!result.destination) {
@@ -37,6 +38,13 @@ export const Notes = () => {
 
         setNotes(items)
     }
+
+    const filteredNotes = [...notes, ...archivedNotes].filter((note) => (
+        note.title.toLowerCase().includes(searchValue.toLowerCase())
+        || note.text.toLowerCase().includes(searchValue.toLowerCase()))
+    )
+
+
 
     return (
         <Box sx={{display: 'flex', width: '100%'}}>

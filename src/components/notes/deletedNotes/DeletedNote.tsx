@@ -15,7 +15,7 @@ const StyledCard = styled(Card)`
 
 export const DeletedNote = ({note}: NotePropsType) => {
 
-    const {setArchiveNotes, setDeletedNotes, notes, setNotes, deletedNotes} = useContext(DataContext);
+    const {setDeletedNotes, notes, setNotes, deletedNotes} = useContext(DataContext);
 
     const restoreNote = (note: NoteType) => {
         const updatedNotes = deletedNotes.filter((data) => data.id !== note.id);

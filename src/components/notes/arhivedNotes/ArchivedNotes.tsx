@@ -12,7 +12,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
 
 export const ArchivedNotes = () => {
 
-    const {archiveNotes} = useContext(DataContext);
+    const {archivedNotes} = useContext(DataContext);
 
 
 
@@ -22,7 +22,7 @@ export const ArchivedNotes = () => {
                 <DrawerHeader/>
                 <Grid container style={{marginTop: 16}}>
                     {
-                        archiveNotes.map((note: NoteType) => (
+                        archivedNotes.map((note: NoteType) => (
                         <ArchivedNote note={note} key={note.id}/>
                     ))
                     }
