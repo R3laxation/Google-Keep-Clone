@@ -40,9 +40,12 @@ export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType)
                         const activeClass = activeIndex === index;
                         return (
                             <ListItem key={item.id} disablePadding sx={{
-                                display: 'block',
+                                display: 'flex',
                                 backgroundColor: `${activeClass ? '#fdefc3' : ''}`,
-                                borderRadius: '10%/50%'
+                                borderRadius: '34px',
+                                borderBottomLeftRadius: open ? 0 : '34px',
+                                borderTopLeftRadius: open ? 0 : '34px',
+                                height: '64px',
                             }}>
                                 <Link to={item.route}
                                       style={{textDecoration: 'none', display: 'flex', color: 'inherit'}}>
@@ -51,7 +54,9 @@ export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType)
                                                         minHeight: 15,
                                                         justifyContent: open ? 'initial' : 'center',
                                                         px: 2.5,
-
+                                                        ":hover": {
+                                                            backgroundColor: 'unset',
+                                                        }
                                                     }}
                                     >
                                         <ListItemIcon
@@ -59,7 +64,6 @@ export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType)
                                                 minWidth: 0,
                                                 mr: open ? 3 : 'auto',
                                                 justifyContent: 'center',
-
                                             }}
                                         >
                                             {item.icon}
