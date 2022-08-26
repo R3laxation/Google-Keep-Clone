@@ -2,6 +2,7 @@ import {Box, ClickAwayListener, styled, TextField} from '@mui/material';
 import React, {ChangeEvent, useContext, useRef, useState} from 'react';
 import {DataContext} from "../../../context/DataProvider";
 import {v4 as uuid} from 'uuid';
+import {saveNotesToLocalStorage} from "../../../storage/localStorage";
 
 const Container = styled(Box)`
   display: flex;
@@ -22,7 +23,7 @@ const note = {
 
 export const AddNoteForm = () => {
 
-    const {setNotes} = useContext(DataContext);
+    const {setNotes, notes} = useContext(DataContext);
     const containerRef = useRef<HTMLElement>();
     const [addNote, setAddNote] = useState<NoteType>({...note, id: uuid()});
 
@@ -42,7 +43,9 @@ export const AddNoteForm = () => {
         }
         setAddNote({...note, id: uuid()});
         if(addNote.text || addNote.title){
-            setNotes((prevArr: any) => [addNote, ...prevArr]);
+            const newNotes = [addNote, ...notes]
+            setNotes(newNotes);
+            saveNotesToLocalStorage(newNotes);
         }
     }
 

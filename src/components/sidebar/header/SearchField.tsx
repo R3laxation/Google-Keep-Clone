@@ -9,8 +9,9 @@ const Search = styled('div')(({theme}) => ({
     backgroundColor: alpha(theme.palette.common.black, 0.05),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.black, 0.05),
-        cursor: 'pointer'
     },
+    display: 'flex',
+    alignItems: 'center',
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
@@ -24,11 +25,12 @@ const SearchIconWrapper = styled('div')(({theme}) => ({
     padding: theme.spacing(0, 2),
     color: '#606265',
     height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+   ' &:hover' : {
+        cursor: 'pointer'
+}
 }));
 
 const StyledInputBase = styled(InputBase)(({theme}) => ({
@@ -36,7 +38,6 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
@@ -47,18 +48,17 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 
 export const SearchField = () => {
 
-    const {searchValue, setSearchValue} = useContext(DataContext);
+    const {setSearchValue} = useContext(DataContext);
 
     const [tempValue, setTempValue] = useState('');
 
     const onTextChange = (e: ChangeEvent) => {
-        setSearchValue((e.target as HTMLInputElement).value)
+        // setSearchValue((e.target as HTMLInputElement).value)
         setTempValue((e.target as HTMLInputElement).value)
     }
 
     const onAddSearchValue = () => {
         setSearchValue(tempValue)
-        console.log('123')
     }
 
     return (
@@ -70,7 +70,7 @@ export const SearchField = () => {
                 <StyledInputBase
                     placeholder="Поиск"
                     inputProps={{'aria-label': 'search'}}
-                    value={searchValue} onChange={(e) => onTextChange(e)}
+                    value={tempValue} onChange={(e) => onTextChange(e)}
                 />
             </Search>
         </Box>
