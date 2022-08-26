@@ -21,9 +21,7 @@ const reorder = (list: any, startIndex: number, endIndex: number) => {
 };
 
 export const Notes = () => {
-
     const {notes, archivedNotes, setNotes, searchValue} = useContext(DataContext);
-
 
     const onDragEnd = (result: any) => {
         if (!result.destination) {
@@ -39,12 +37,12 @@ export const Notes = () => {
         setNotes(items)
     }
 
-    const filteredNotes = [...notes, ...archivedNotes].filter((note) => (
+    const filteredNotes = archivedNotes.concat(notes).filter((note) => (
         note.title.toLowerCase().includes(searchValue.toLowerCase())
         || note.text.toLowerCase().includes(searchValue.toLowerCase()))
     )
 
-
+    console.log('filteredNotes',filteredNotes)
 
     return (
         <Box sx={{display: 'flex', width: '100%'}}>
@@ -59,7 +57,7 @@ export const Notes = () => {
                                     <Grid container style={{marginTop: 16}} {...provided.droppableProps}
                                           ref={provided.innerRef}>
                                         {
-                                            notes.map((note, index) => (
+                                           (!!searchValue ? filteredNotes : notes).map((note, index) => (
                                                 <Draggable key={note.id} draggableId={note.id} index={index}>
                                                     {(provided) => (
                                                         <Grid item

@@ -14,7 +14,7 @@ import {Link} from 'react-router-dom';
 
 export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType) => {
 
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(-1);
 
     const listItem = [
         {id: 1, name: 'Заметки', icon: <LightBulb/>, route: '/'},
@@ -56,7 +56,7 @@ export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType)
                                                         px: 2.5,
                                                         ":hover": {
                                                             backgroundColor: 'unset',
-                                                        }
+                                                        },
                                                     }}
                                     >
                                         <ListItemIcon

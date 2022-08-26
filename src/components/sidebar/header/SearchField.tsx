@@ -9,6 +9,7 @@ const Search = styled('div')(({theme}) => ({
     backgroundColor: alpha(theme.palette.common.black, 0.05),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.black, 0.05),
+        cursor: 'pointer'
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -46,17 +47,25 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 
 export const SearchField = () => {
 
-    const {searchValue, setSearchValue} = useContext(DataContext)
+    const {searchValue, setSearchValue} = useContext(DataContext);
+
+    const [tempValue, setTempValue] = useState('');
 
     const onTextChange = (e: ChangeEvent) => {
         setSearchValue((e.target as HTMLInputElement).value)
+        setTempValue((e.target as HTMLInputElement).value)
+    }
+
+    const onAddSearchValue = () => {
+        setSearchValue(tempValue)
+        console.log('123')
     }
 
     return (
         <Box sx={{flexGrow: 1}}>
             <Search>
-                <SearchIconWrapper>
-                    <SearchIcon/>
+                <SearchIconWrapper onClick={onAddSearchValue} >
+                    <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
                     placeholder="Поиск"

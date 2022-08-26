@@ -19,7 +19,6 @@ export const Note = ({note}: NotePropsType) => {
 
     const archiveNote = (note: NoteType) => {
         const updatedNotes = notes.filter((data) => data.id !== note.id);
-
         setNotes(updatedNotes);
         setArchivedNotes((prevArr) => [note, ...prevArr]);
     }
