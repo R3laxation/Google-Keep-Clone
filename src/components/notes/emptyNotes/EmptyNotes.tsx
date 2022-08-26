@@ -16,7 +16,6 @@ const Container = styled(Box)`
   flex-direction: column;
   align-items: center;
   margin-top: 20vh;
-
 `
 
 export const EmptyNotes = () => {

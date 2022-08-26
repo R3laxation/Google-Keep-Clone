@@ -9,10 +9,13 @@ export const DataProvider = ({children}: DataProviderPropsType) => {
     const [archivedNotes, setArchivedNotes] = useState([] as NoteType[]);
     const [deletedNotes, setDeletedNotes] = useState([] as NoteType[]);
     const [searchValue, setSearchValue] = useState('');
+    const [alertIsOpen, setAlertIsOpen] = useState(true);
 
     return(
         <DataContext.Provider value={{
-            notes, setNotes, archivedNotes, setArchivedNotes, deletedNotes, setDeletedNotes, searchValue, setSearchValue
+            notes, setNotes, archivedNotes, setArchivedNotes,
+            deletedNotes, setDeletedNotes, searchValue, setSearchValue,
+            alertIsOpen, setAlertIsOpen
         }}>
             {children}
         </DataContext.Provider>
@@ -32,4 +35,6 @@ export type ProviderValueType = {
     setDeletedNotes: Dispatch<SetStateAction<NoteType[]>>
     searchValue: string
     setSearchValue: Dispatch<SetStateAction<string>>
+    alertIsOpen: boolean
+    setAlertIsOpen: Dispatch<SetStateAction<boolean>>
 }

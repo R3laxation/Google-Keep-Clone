@@ -6,6 +6,7 @@ import {Sidebar} from "./components/sidebar/Sidebar";
 import { Notes } from './components/notes/Notes';
 import { DeletedNotes } from './components/notes/deletedNotes/DeletedNotes';
 import { ArchivedNotes } from './components/notes/arhivedNotes/ArchivedNotes';
+import {AlertComponent} from './components/Alert';
 
 
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path={'/delete'} element={<DeletedNotes/>}/>
                 </Routes>
             </Box>
+            <AlertComponent/>
         </DataProvider>
     );
 }

@@ -1,4 +1,4 @@
-import {Box, Grid} from '@mui/material';
+import {Alert, Box, Grid, Stack} from '@mui/material';
 import React, {useContext} from 'react';
 import {styled} from "@mui/material/styles";
 import {AddNoteForm} from "./addNoteForm/AddNoteForm";
@@ -41,8 +41,6 @@ export const Notes = () => {
         note.title.toLowerCase().includes(searchValue.toLowerCase())
         || note.text.toLowerCase().includes(searchValue.toLowerCase()))
     )
-
-    console.log('filteredNotes',filteredNotes)
 
     return (
         <Box sx={{display: 'flex', width: '100%'}}>

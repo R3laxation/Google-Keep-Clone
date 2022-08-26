@@ -2,7 +2,7 @@ import {Box, ClickAwayListener, styled, TextField} from '@mui/material';
 import React, {ChangeEvent, useContext, useRef, useState} from 'react';
 import {DataContext} from "../../../context/DataProvider";
 import {v4 as uuid} from 'uuid';
-import {saveNotesToLocalStorage} from "../../../storage/localStorage";
+import {saveNotesToLocalStorage} from "../../../utils/localStorage/localStorage";
 
 const Container = styled(Box)`
   display: flex;

@@ -1,19 +1,10 @@
-import {Card, CardActions, CardContent, styled, Typography} from '@mui/material';
-import React, { useContext } from 'react';
+import {Box, CardActions, CardContent, Typography} from '@mui/material';
+import React, {useContext} from 'react';
 import {NoteType} from "../addNoteForm/AddNoteForm";
-import {RestoreFromTrashOutlined as Restore, DeleteForeverOutlined as Delete} from '@mui/icons-material';
+import {DeleteForeverOutlined as Delete, RestoreFromTrashOutlined as Restore} from '@mui/icons-material';
 import {DataContext} from "../../../context/DataProvider";
-import {saveDeletedToLocalStorage, saveNotesToLocalStorage} from "../../../storage/localStorage";
-
-
-const StyledCard = styled(Card)`
-  width: 240px;
-  margin: 8px;
-  box-shadow: none;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  cursor: default;
-`
+import {saveDeletedToLocalStorage, saveNotesToLocalStorage} from "../../../utils/localStorage/localStorage";
+import {iconStyle, StyledCard} from "../note/Note";
 
 export const DeletedNote = ({note}: NotePropsType) => {
 
@@ -41,8 +32,12 @@ export const DeletedNote = ({note}: NotePropsType) => {
                 <Typography>{note.text}</Typography>
             </CardContent>
             <CardActions>
-                <Delete fontSize={"small"} onClick={() => deleteNote(note)} style={{marginLeft: 'auto', cursor:'pointer'}} />
-                <Restore fontSize={"small"} style={{cursor:'pointer'}} onClick={() => restoreNote(note)}/>
+                <Box sx={iconStyle}>
+                    <Delete fontSize={"small"} onClick={() => deleteNote(note)} />
+                </Box>
+                <Box sx={iconStyle}>
+                    <Restore fontSize={"small"} onClick={() => restoreNote(note)}/>
+                </Box>
             </CardActions>
         </StyledCard>
     );

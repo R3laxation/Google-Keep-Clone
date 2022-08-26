@@ -7,9 +7,6 @@ const Search = styled('div')(({theme}) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.black, 0.05),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.black, 0.05),
-    },
     display: 'flex',
     alignItems: 'center',
     marginRight: theme.spacing(2),
@@ -44,6 +41,7 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
             width: '20ch',
         },
     },
+
 }));
 
 export const SearchField = () => {

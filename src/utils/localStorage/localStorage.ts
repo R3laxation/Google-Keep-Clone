@@ -1,4 +1,4 @@
-import {NoteType} from "../components/notes/addNoteForm/AddNoteForm";
+import {NoteType} from "../../components/notes/addNoteForm/AddNoteForm";
 
 export const saveNotesToLocalStorage = (notes: NoteType[]) => {
     localStorage.setItem('google-keep-clone-notes', JSON.stringify(notes))

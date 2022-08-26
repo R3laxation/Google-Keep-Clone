@@ -1,12 +1,11 @@
 import * as React from 'react';
+import {useContext, useEffect} from 'react';
 import {CSSObject, styled, Theme} from '@mui/material/styles';
-import {Drawer as MuiDrawer, Box} from '@mui/material';
+import {Alert, Box, Drawer as MuiDrawer, Stack} from '@mui/material';
 import {NavList} from "./Items/NavList";
 import {Header} from './header/Header';
-import {useContext, useEffect} from 'react';
-import {NoteType} from "../notes/addNoteForm/AddNoteForm";
 import {DataContext} from "../../context/DataProvider";
-import { getFromLocalStorage } from '../../storage/localStorage';
+import {getFromLocalStorage} from '../../utils/localStorage/localStorage';
 
 const drawerWidth = 240;
 
@@ -16,6 +15,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
     }),
+    boxShadow: 'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;',
     overflowX: 'hidden',
 });
 
@@ -25,6 +25,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
+    borderRight: 'none',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
         width: `calc(${theme.spacing(8)} + 1px)`,

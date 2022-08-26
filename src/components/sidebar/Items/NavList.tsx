@@ -10,6 +10,7 @@ import {
     LightbulbOutlined as LightBulb
 } from "@mui/icons-material";
 import {Link} from 'react-router-dom';
+import styles from './NavList.module.css';
 
 
 export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType) => {
@@ -34,7 +35,7 @@ export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType)
 
     return (
         <div>
-            <List onMouseEnter={onMouseHandler} onMouseLeave={onMouseHandler}>
+            <List onMouseEnter={onMouseHandler} onMouseLeave={onMouseHandler} >
                 {
                     listItem.map((item, index) => {
                         const activeClass = activeIndex === index;
@@ -42,20 +43,26 @@ export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType)
                             <ListItem key={item.id} disablePadding sx={{
                                 display: 'flex',
                                 backgroundColor: `${activeClass ? '#fdefc3' : ''}`,
+                                transition: 'color 1500ms easy',
                                 borderRadius: '34px',
                                 borderBottomLeftRadius: open ? 0 : '34px',
                                 borderTopLeftRadius: open ? 0 : '34px',
                                 height: '64px',
-                            }}>
-                                <Link to={item.route}
+                                ":hover" : {
+                                    backgroundColor: `${activeClass ? '#fdefc3' : '#f1f3f4'}`
+                                },
+                            }
+                            }>
+                                <Link to={item.route} className={styles.link}
                                       style={{textDecoration: 'none', display: 'flex', color: 'inherit'}}>
                                     <ListItemButton onClick={() => setActiveHandler(index)}
                                                     sx={{
                                                         minHeight: 15,
                                                         justifyContent: open ? 'initial' : 'center',
                                                         px: 2.5,
+                                                        backgroundColor: 'transparent !important',
                                                         ":hover": {
-                                                            backgroundColor: `${activeClass ? 'unset' : '#e5dfdf'}`,
+                                                            backgroundColor:  'unset',
                                                         },
                                                     }}
                                     >
