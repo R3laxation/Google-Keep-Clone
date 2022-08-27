@@ -38,38 +38,32 @@ export const iconStyle = {
 
 export const Note = ({note}: NotePropsType) => {
 
-    const {setArchivedNotes, setDeletedNotes, notes, setNotes, archivedNotes, deletedNotes, setAlertIsOpen, alertIsOpen} = useContext(DataContext);
+    const {setArchivedNotes, setDeletedNotes, notes, setNotes, archivedNotes, deletedNotes, setAlert} = useContext(DataContext);
 
     const archiveNote = (note: NoteType) => {
-        setAlertIsOpen(true)
+        setAlert('Заметка добавлена в архив')
         const updatedNotes = notes.filter((data) => data.id !== note.id);
         const archived = [note, ...archivedNotes];
         setNotes(updatedNotes);
         setArchivedNotes(archived);
         saveNotesToLocalStorage(updatedNotes);
         saveArchivedToLocalStorage(archived);
-
+        setTimeout(() => {
+            setAlert('')
+        }, 3000)
     }
 
-    // useEffect(() => {
-    //
-    //     if(alertIsOpen) {
-    //         var timeoutId = setTimeout(() => {
-    //             setAlertIsOpen(false)
-    //         }, 3000)
-    //     }
-    //     return () => {
-    //         clearTimeout(timeoutId)
-    //     }
-    // }, [alertIsOpen])
-
     const deleteNote = (note: NoteType) => {
+        setAlert('Заметка перемещена в корзину')
         const updatedNotes = notes.filter((data) => data.id !== note.id);
         const deleted = [note, ...deletedNotes];
         setNotes(updatedNotes);
         setDeletedNotes(deleted);
         saveNotesToLocalStorage(updatedNotes);
         saveDeletedToLocalStorage(deleted);
+        setTimeout(() => {
+            setAlert('')
+        }, 3000)
     }
 
     return (

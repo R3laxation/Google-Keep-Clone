@@ -1,19 +1,29 @@
-import React, {useContext, useEffect} from 'react';
-import {Alert, Stack} from "@mui/material";
+import React, {useContext} from 'react';
+import {Alert, Stack, styled} from "@mui/material";
 import {DataContext} from "../context/DataProvider";
+
+
+const CustomAlert = styled(Alert)`
+  width: 300px;
+  height: max-content;
+  z-index: 1500;
+  position: fixed;
+  left: 60px;
+  bottom: 20px;
+  background-color: #2e2e2e;
+  color: #feefc4
+`
 
 export const AlertComponent = () => {
 
-    const {alertIsOpen} = useContext(DataContext);
-
-    useEffect(() => {console.log(alertIsOpen,"in alert")},[alertIsOpen])
+    const {alert} = useContext(DataContext);
 
     return (
         <Stack sx={{width: '100%'}} spacing={2}>
             {
-                alertIsOpen && <Alert variant="filled" severity="success" sx={{width: 300, height: 'max-content', zIndex: 1500,  position: 'fixed', left: '60px', bottom: '20px'}} >
-                Заметка добавлена в архив
-                </Alert>
+                alert && <CustomAlert variant="filled" severity="success" >
+                    {alert}
+                </CustomAlert>
             }
         </Stack>
     );

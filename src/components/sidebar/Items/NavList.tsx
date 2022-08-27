@@ -11,6 +11,23 @@ import {
 } from "@mui/icons-material";
 import {Link} from 'react-router-dom';
 import styles from './NavList.module.css';
+import {alpha, Box, styled} from "@mui/material";
+
+
+
+// const StyledListItem = styled(ListItem)`
+//   display: 'flex';
+//   background-color: `${activeClass ? '#fdefc3' : ''}`;
+//   transition: 'color 1500ms easy';
+//   border-radius: '34px';
+//   border-bottom-left-radius: open ?  0: '34px';
+//   border-bottom-right-radius: open ?  0: '34px';
+//   height: '64px', ":hover": {
+//   background-color: : `${activeClass ? '#fdefc3' : '#f1f3f4'}`
+// };
+// `
+
+
 
 
 export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType) => {

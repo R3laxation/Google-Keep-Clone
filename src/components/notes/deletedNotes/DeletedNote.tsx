@@ -8,7 +8,7 @@ import {iconStyle, StyledCard} from "../note/Note";
 
 export const DeletedNote = ({note}: NotePropsType) => {
 
-    const {setDeletedNotes, notes, setNotes, deletedNotes} = useContext(DataContext);
+    const {setDeletedNotes, notes, setNotes, deletedNotes, setAlert} = useContext(DataContext);
 
     const restoreNote = (note: NoteType) => {
         const updatedNotes = deletedNotes.filter((data) => data.id !== note.id);
@@ -20,9 +20,13 @@ export const DeletedNote = ({note}: NotePropsType) => {
     }
 
     const deleteNote = (note: NoteType) => {
+        setAlert('Заметка восстановлена')
         const updatedNotes = deletedNotes.filter((data) => data.id !== note.id);
         setDeletedNotes(updatedNotes);
         saveDeletedToLocalStorage(updatedNotes);
+        setTimeout(() => {
+            setAlert('')
+        }, 3000)
     }
 
     return (

@@ -12,24 +12,32 @@ import {iconStyle, StyledCard} from "../note/Note";
 
 export const ArchivedNote = ({note}: NotePropsType) => {
 
-    const {setArchivedNotes, setDeletedNotes, notes, setNotes, archivedNotes, deletedNotes} = useContext(DataContext);
+    const {setArchivedNotes, setDeletedNotes, notes, setNotes, archivedNotes, deletedNotes, setAlert} = useContext(DataContext);
 
     const unArchiveNote = (note: NoteType) => {
+        setAlert('Заметка возвращена из архива')
         const updatedNotes = archivedNotes.filter((data) => data.id !== note.id);
         const unarchived = [note, ...notes];
         setArchivedNotes(updatedNotes);
         setNotes(unarchived);
         saveNotesToLocalStorage(unarchived);
         saveArchivedToLocalStorage(updatedNotes);
+        setTimeout(() => {
+            setAlert('')
+        }, 3000)
     }
 
     const deleteNote = (note: NoteType) => {
+        setAlert('Заметка перемещена в корзину')
         const updatedNotes = archivedNotes.filter((data) => data.id !== note.id);
         const deleted = [note, ...deletedNotes];
         setArchivedNotes(updatedNotes);
         setDeletedNotes(deleted);
         saveArchivedToLocalStorage(updatedNotes);
         saveDeletedToLocalStorage(deleted);
+        setTimeout(() => {
+            setAlert('')
+        }, 3000)
     }
 
     return (
