@@ -24,7 +24,7 @@ export const ArchivedNote = ({note}: NotePropsType) => {
         saveArchivedToLocalStorage(updatedNotes);
         setTimeout(() => {
             setAlert('')
-        }, 3000)
+        }, 2000)
     }
 
     const deleteNote = (note: NoteType) => {
@@ -37,7 +37,7 @@ export const ArchivedNote = ({note}: NotePropsType) => {
         saveDeletedToLocalStorage(deleted);
         setTimeout(() => {
             setAlert('')
-        }, 3000)
+        }, 2000)
     }
 
     return (

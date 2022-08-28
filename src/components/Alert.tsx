@@ -11,7 +11,8 @@ const CustomAlert = styled(Alert)`
   left: 60px;
   bottom: 20px;
   background-color: #2e2e2e;
-  color: #feefc4
+  color: #feefc4;
+  transition: all 1500ms ease;
 `
 
 export const AlertComponent = () => {

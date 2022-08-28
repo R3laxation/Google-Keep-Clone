@@ -26,7 +26,7 @@ export const DeletedNote = ({note}: NotePropsType) => {
         saveDeletedToLocalStorage(updatedNotes);
         setTimeout(() => {
             setAlert('')
-        }, 3000)
+        }, 2000)
     }
 
     return (

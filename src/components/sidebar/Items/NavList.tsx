@@ -60,7 +60,7 @@ export const NavList = ({open, handleDrawer, buttonIsClicked}: NavListPropsType)
                             <ListItem key={item.id} disablePadding sx={{
                                 display: 'flex',
                                 backgroundColor: `${activeClass ? '#fdefc3' : ''}`,
-                                transition: 'color 1500ms easy',
+                                transition: 'background-color 200ms ease',
                                 borderRadius: '34px',
                                 borderBottomLeftRadius: open ? 0 : '34px',
                                 borderTopLeftRadius: open ? 0 : '34px',
