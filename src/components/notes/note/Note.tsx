@@ -1,7 +1,6 @@
-import {Box, Card, CardActions, CardContent, styled, Typography} from '@mui/material';
-import React, {useContext, useEffect, useState} from 'react';
+import {Card, CardActions, styled} from '@mui/material';
+import React, {useContext} from 'react';
 import {NoteType} from "../addNoteForm/AddNoteForm";
-import {ArchiveOutlined as Archive, DeleteOutlined as Delete, EditOutlined as Edit} from '@mui/icons-material';
 import {DataContext} from "../../../context/DataProvider";
 import {
     saveArchivedToLocalStorage,
@@ -9,6 +8,10 @@ import {
     saveNotesToLocalStorage
 } from "../../../utils/localStorage/localStorage";
 import {EditModal} from "../../modals/EditModal";
+import {NoteContent} from "../noteContent/NoteContent";
+import {NoteAction} from "../noteAction/NoteAction";
+import {ArchiveOutlined as Archive, DeleteOutlined as Delete, EditOutlined as Edit} from '@mui/icons-material';
+import {useModalHook} from "../../../context/useModalHook";
 
 export const StyledCard = styled(Card)`
   width: 240px;
@@ -22,27 +25,14 @@ export const StyledCard = styled(Card)`
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
 `
-export const iconStyle = {
-    marginLeft: 'auto',
-    cursor:'pointer',
-    width: '30px',
-    height: '30px',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'background-color 300ms ease',
-    ":hover": {
-        backgroundColor: '#eaebeb'
-    }
-}
 
 export const Note = ({note}: NotePropsType) => {
 
-    const {setArchivedNotes, setDeletedNotes, notes,
-        setNotes, archivedNotes, deletedNotes, setAlert} = useContext(DataContext);
-
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const {
+        setArchivedNotes, setDeletedNotes, notes,
+        setNotes, archivedNotes, deletedNotes, setAlert
+    } = useContext(DataContext);
+    const {modalIsOpen, openModal, closeModal} = useModalHook();
 
     const archiveNote = (note: NoteType) => {
         setAlert('Заметка добавлена в архив')
@@ -70,38 +60,32 @@ export const Note = ({note}: NotePropsType) => {
         }, 2000)
     }
 
-    const openModal = () =>{
-        setModalIsOpen(true)
-    }
-
-    const closeModal = () =>{
-        setModalIsOpen(false)
-    }
+    const noteActions = [
+        {
+            tooltipText: 'Редактировать',
+            component: () => <Edit fontSize={"small"} onClick={openModal}/>
+        },
+        {
+            tooltipText: 'Добавить в архив',
+            component: () => <Archive fontSize={"small"} onClick={() => archiveNote(note)}/>
+        },
+        {
+            tooltipText: 'Удалить',
+            component: () => <Delete fontSize={"small"} onClick={() => deleteNote(note)}/>
+        },
+    ];
 
     return (
         <>
             <StyledCard>
-                <CardContent>
-                    <Typography>{note.title}</Typography>
-                    <Typography>{note.text}</Typography>
-                </CardContent>
+                <NoteContent title={note.title} text={note.text}/>
                 <CardActions>
-                    <Box sx={iconStyle}>
-                        <Edit fontSize={"small"} onClick={openModal}/>
-                    </Box>
-                    <Box sx={iconStyle}>
-                        <Archive fontSize={"small"} onClick={() => archiveNote(note)}/>
-                    </Box>
-                    <Box sx={iconStyle}>
-                        <Delete fontSize={"small"} onClick={() => deleteNote(note)}/>
-                    </Box>
+                    {noteActions.map((item, i) => <NoteAction key={i} settings={item}/>)}
                 </CardActions>
-                <EditModal open={modalIsOpen} closeModal={closeModal}/>
+                <EditModal open={modalIsOpen} closeModal={closeModal} note={note}
+                           noteType={'notes'} noteSetter={'setNotes'}/>
             </StyledCard>
-
         </>
-
-
     );
 };
 

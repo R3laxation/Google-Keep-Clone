@@ -1,18 +1,31 @@
-import {Box, CardActions, CardContent, Typography} from '@mui/material';
+import {CardActions} from '@mui/material';
 import React, {useContext} from 'react';
 import {NoteType} from "../addNoteForm/AddNoteForm";
-import {DeleteOutlined as Delete, UnarchiveOutlined as Unarchive} from '@mui/icons-material';
+import {ArchiveOutlined as Archive, DeleteOutlined as Delete, EditOutlined as Edit} from '@mui/icons-material';
 import {DataContext} from "../../../context/DataProvider";
 import {
     saveArchivedToLocalStorage,
     saveDeletedToLocalStorage,
     saveNotesToLocalStorage
 } from "../../../utils/localStorage/localStorage";
-import {iconStyle, StyledCard} from "../note/Note";
+import {StyledCard} from "../note/Note";
+import {NoteContent} from "../noteContent/NoteContent";
+import {NoteAction} from '../noteAction/NoteAction';
+import {useModalHook} from "../../../context/useModalHook";
+import {EditModal} from "../../modals/EditModal";
 
 export const ArchivedNote = ({note}: NotePropsType) => {
 
-    const {setArchivedNotes, setDeletedNotes, notes, setNotes, archivedNotes, deletedNotes, setAlert} = useContext(DataContext);
+    const {
+        setArchivedNotes,
+        setDeletedNotes,
+        notes,
+        setNotes,
+        archivedNotes,
+        deletedNotes,
+        setAlert
+    } = useContext(DataContext);
+    const {modalIsOpen, openModal, closeModal} = useModalHook();
 
     const unArchiveNote = (note: NoteType) => {
         setAlert('Заметка возвращена из архива')
@@ -40,20 +53,31 @@ export const ArchivedNote = ({note}: NotePropsType) => {
         }, 2000)
     }
 
+    const noteActions = [
+        {
+            tooltipText: 'Редактировать',
+            component: () => <Edit fontSize={"small"} onClick={openModal}/>
+        },
+        {
+            tooltipText: 'Вернуть из архива',
+            component: () => <Archive fontSize={"small"} onClick={() => unArchiveNote(note)}/>
+        },
+        {
+            tooltipText: 'Удалить',
+            component: () => <Delete fontSize={"small"} onClick={() => deleteNote(note)}/>
+        },
+    ];
+
+
     return (
         <StyledCard>
-            <CardContent>
-                <Typography>{note.title}</Typography>
-                <Typography>{note.text}</Typography>
-            </CardContent>
+            <NoteContent title={note.title} text={note.text}/>
             <CardActions>
-                <Box sx={iconStyle}>
-                    <Unarchive fontSize={"small"} onClick={() => unArchiveNote(note)}/>
-                </Box>
-                <Box sx={iconStyle}>
-                    <Delete fontSize={"small"} onClick={() => deleteNote(note)}/>
-                </Box>
+                {noteActions.map((item, i) => <NoteAction key={i} settings={item}/>)}
             </CardActions>
+            <EditModal open={modalIsOpen} closeModal={closeModal} note={note}
+                       noteType={'archivedNotes'} noteSetter={'setArchivedNotes'}
+            />
         </StyledCard>
     );
 };

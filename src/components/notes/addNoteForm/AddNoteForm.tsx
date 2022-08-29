@@ -4,7 +4,7 @@ import {DataContext} from "../../../context/DataProvider";
 import {v4 as uuid} from 'uuid';
 import {saveNotesToLocalStorage} from "../../../utils/localStorage/localStorage";
 
-const Container = styled(Box)`
+export const Container = styled(Box)`
   display: flex;
   flex-direction: column;
   width: 600px;
@@ -57,13 +57,13 @@ export const AddNoteForm = () => {
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
             <Container ref={containerRef}>
-                {showTextFiled && <TextField placeholder={'Введите заголовок'} variant={"standard"}
+                {showTextFiled && <TextField placeholder={'Введите заголовок'} variant={"standard"} multiline maxRows={Infinity}
                                              InputProps={{disableUnderline: true}} style={{marginBottom: 10}}
-                                             onChange={(e) => onTextChange(e)} name='title' value={addNote.title}
+                                             onChange={onTextChange} name='title' value={addNote.title}
                 />}
                 <TextField placeholder={'Заметка...'} multiline maxRows={Infinity} variant={"standard"}
                            InputProps={{disableUnderline: true}} onClick={onClickHandler}
-                           onChange={(e) => onTextChange(e)}
+                           onChange={onTextChange}
                            name='text' value={addNote.text}
                 />
             </Container>

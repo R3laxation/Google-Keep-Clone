@@ -1,4 +1,4 @@
-import {Alert, Box, Grid, Stack} from '@mui/material';
+import {Box, Grid} from '@mui/material';
 import React, {useContext} from 'react';
 import {styled} from "@mui/material/styles";
 import {AddNoteForm} from "./addNoteForm/AddNoteForm";
