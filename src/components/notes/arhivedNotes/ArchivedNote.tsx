@@ -28,7 +28,6 @@ export const ArchivedNote = ({note}: NotePropsType) => {
     const {modalIsOpen, toggleEditModal} = useModalHook();
 
     const unArchiveNote = (note: NoteType) => {
-        console.log('archive', note.id)
         setAlert('Заметка возвращена из архива')
         const updatedNotes = archivedNotes.filter((data) => data.id !== note.id);
         const unarchived = [note, ...notes];
@@ -42,7 +41,6 @@ export const ArchivedNote = ({note}: NotePropsType) => {
     }
 
     const deleteNote = (note: NoteType) => {
-        console.log('delete', note.id)
         setAlert('Заметка перемещена в корзину')
         const updatedNotes = archivedNotes.filter((data) => data.id !== note.id);
         const deleted = [note, ...deletedNotes];

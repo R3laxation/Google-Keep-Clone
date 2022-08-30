@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useContext, useState} from 'react';
 import {alpha, Box, InputBase, styled} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 import {DataContext} from "../../../context/DataProvider";
 
 const Search = styled('div')(({theme}) => ({
@@ -21,13 +22,27 @@ const Search = styled('div')(({theme}) => ({
 const SearchIconWrapper = styled('div')(({theme}) => ({
     padding: theme.spacing(0, 2),
     color: '#606265',
-    height: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-   ' &:hover' : {
-        cursor: 'pointer'
-}
+    opacity: '0.6',
+    ' &:hover': {
+        cursor: 'pointer',
+        opacity: '1',
+    },
+}));
+
+const ClearIconWrapper = styled('div')(({theme}) => ({
+    padding: theme.spacing(0, 2),
+    color: '#606265',
+    position: 'absolute',
+    right: '8px',
+    top: '8px',
+    opacity: '0.6',
+    ' &:hover': {
+        cursor: 'pointer',
+        opacity: '1',
+    }
 }));
 
 const StyledInputBase = styled(InputBase)(({theme}) => ({
@@ -51,25 +66,38 @@ export const SearchField = () => {
     const [tempValue, setTempValue] = useState('');
 
     const onTextChange = (e: ChangeEvent) => {
-        // setSearchValue((e.target as HTMLInputElement).value)
+        setSearchValue((e.target as HTMLInputElement).value)
         setTempValue((e.target as HTMLInputElement).value)
     }
 
-    const onAddSearchValue = () => {
-        setSearchValue(tempValue)
+    const clearValue = () => {
+        setSearchValue('')
+        setTempValue('')
     }
+
+    // Можно повешать onClick с onAddSearchValue на wrapper, но тогда смысла в onChange нет, а в оригинале onChange работает
+
+
+    // const onAddSearchValue = () => {
+    //     setSearchValue(tempValue)
+    // }
 
     return (
         <Box sx={{flexGrow: 1}}>
             <Search>
-                <SearchIconWrapper onClick={onAddSearchValue} >
-                    <SearchIcon />
+                <SearchIconWrapper>
+                    <SearchIcon/>
                 </SearchIconWrapper>
                 <StyledInputBase
                     placeholder="Поиск"
                     inputProps={{'aria-label': 'search'}}
                     value={tempValue} onChange={(e) => onTextChange(e)}
                 />
+                {
+                    tempValue && <ClearIconWrapper onClick={clearValue}>
+                        <ClearIcon/>
+                    </ClearIconWrapper>
+                }
             </Search>
         </Box>
 

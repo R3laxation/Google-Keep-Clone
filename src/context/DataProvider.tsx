@@ -5,6 +5,8 @@ export const DataContext = createContext<ProviderValueType>({} as ProviderValueT
 
 export const DataProvider = ({children}: DataProviderPropsType) => {
 
+    // Состояния для разных компонент, для поиска и уведомления
+
     const [notes, setNotes] = useState([] as NoteType[]);
     const [archivedNotes, setArchivedNotes] = useState([] as NoteType[]);
     const [deletedNotes, setDeletedNotes] = useState([] as NoteType[]);
