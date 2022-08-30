@@ -32,7 +32,7 @@ export const Note = ({note}: NotePropsType) => {
         setArchivedNotes, setDeletedNotes, notes,
         setNotes, archivedNotes, deletedNotes, setAlert
     } = useContext(DataContext);
-    const {modalIsOpen, openModal, closeModal} = useModalHook();
+    const {modalIsOpen, toggleEditModal} = useModalHook();
 
     const archiveNote = (note: NoteType) => {
         setAlert('Заметка добавлена в архив')
@@ -63,7 +63,7 @@ export const Note = ({note}: NotePropsType) => {
     const noteActions = [
         {
             tooltipText: 'Редактировать',
-            component: () => <Edit fontSize={"small"} onClick={openModal}/>
+            component: () => <Edit fontSize={"small"} onClick={toggleEditModal}/>
         },
         {
             tooltipText: 'Добавить в архив',
@@ -82,7 +82,7 @@ export const Note = ({note}: NotePropsType) => {
                 <CardActions>
                     {noteActions.map((item, i) => <NoteAction key={i} settings={item}/>)}
                 </CardActions>
-                <EditModal open={modalIsOpen} closeModal={closeModal} note={note}
+                <EditModal open={modalIsOpen} closeModal={toggleEditModal} note={note}
                            noteType={'notes'} noteSetter={'setNotes'}/>
             </StyledCard>
         </>

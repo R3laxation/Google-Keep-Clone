@@ -47,8 +47,7 @@ export const EditModal = ({open, closeModal, note, noteType, noteSetter}: EditPr
                 <DialogContent>
                     <Container>
                         <TextField
-                            autoFocus
-                            placeholder={title ? title : 'Введите заголовок'}
+                            placeholder={editedNote.title ? editedNote.title : 'Введите заголовок'}
                             variant="standard"
                             InputProps={{disableUnderline: true}}
                             style={{marginBottom: 10}}
@@ -61,7 +60,7 @@ export const EditModal = ({open, closeModal, note, noteType, noteSetter}: EditPr
                         <TextField
                             autoFocus
                             InputProps={{disableUnderline: true}}
-                            placeholder={text ? text : 'Текст заметки'}
+                            placeholder={editedNote.text ? editedNote.text : 'Текст заметки'}
                             variant="standard"
                             value={editedNote.text}
                             multiline maxRows={Infinity}

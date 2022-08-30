@@ -10,7 +10,7 @@ export const NoteContent = ({title, text}: CardContentPropsType) => {
                         <Typography>{title}</Typography>
                         <Typography>{text}</Typography>
                     </>
-                    : <Typography sx={{color: '#80868b', width: '100%', textAlign: 'center'}}>Пустая заметка </Typography>
+                    : <Typography sx={{color: '#80868b', width: '100%', textAlign: 'center', fontSize: '22px'}}>Пустая заметка </Typography>
             }
         </CardContent>
     );

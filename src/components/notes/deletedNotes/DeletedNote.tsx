@@ -13,11 +13,13 @@ import {NoteContent} from "../noteContent/NoteContent";
 import {NoteAction} from '../noteAction/NoteAction';
 import {useModalHook} from "../../../context/useModalHook";
 import {EditModal} from "../../modals/EditModal";
+import {DeleteModal} from '../../modals/DeleteModal';
 
 export const DeletedNote = ({note}: NotePropsType) => {
 
     const {setDeletedNotes, notes, setNotes, deletedNotes, setAlert} = useContext(DataContext);
-    const {modalIsOpen, openModal, closeModal} = useModalHook();
+    const {modalIsOpen, toggleEditModal, toggleDeleteModal, isEdit} = useModalHook();
+
 
     const restoreNote = (note: NoteType) => {
         setAlert('Заметка восстановлена')
@@ -27,29 +29,29 @@ export const DeletedNote = ({note}: NotePropsType) => {
         setNotes(restored);
         saveDeletedToLocalStorage(updatedNotes);
         saveNotesToLocalStorage(restored);
+        setTimeout(() => {
+            setAlert('')
+        }, 2000)
     }
 
     const deleteNote = (note: NoteType) => {
         const updatedNotes = deletedNotes.filter((data) => data.id !== note.id);
         setDeletedNotes(updatedNotes);
         saveDeletedToLocalStorage(updatedNotes);
-        setTimeout(() => {
-            setAlert('')
-        }, 2000)
     }
 
     const noteActions = [
         {
             tooltipText: 'Редактировать',
-            component: () => <Edit fontSize={"small"} onClick={openModal}/>
-        },
-        {
-            tooltipText: 'Удалить навсегда',
-            component: () => <Delete fontSize={"small"} onClick={() => deleteNote(note)}/>
+            component: () => <Edit fontSize={"small"} onClick={toggleEditModal}/>
         },
         {
             tooltipText: 'Восстановить',
             component: () => <Restore fontSize={"small"} onClick={() => restoreNote(note)}/>
+        },
+        {
+            tooltipText: 'Удалить навсегда',
+            component: () => <Delete fontSize={"small"} onClick={toggleDeleteModal}/>
         },
     ];
 
@@ -60,9 +62,12 @@ export const DeletedNote = ({note}: NotePropsType) => {
             <CardActions>
                 {noteActions.map((item, i) => <NoteAction key={i} settings={item}/>)}
             </CardActions>
-            <EditModal open={modalIsOpen} closeModal={closeModal} note={note}
-                       noteType={'deletedNotes'} noteSetter={'setDeletedNotes'}
-            />
+            {isEdit
+                ? <EditModal open={modalIsOpen} closeModal={toggleEditModal} note={note}
+                             noteType={'deletedNotes'} noteSetter={'setDeletedNotes'}
+                />
+                : <DeleteModal open={modalIsOpen} closeModal={toggleDeleteModal} deleteNote={deleteNote} note={note}/>
+            }
         </StyledCard>
     );
 };
