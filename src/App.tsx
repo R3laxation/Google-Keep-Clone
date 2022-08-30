@@ -2,11 +2,11 @@ import {Box} from '@mui/material';
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './App.css';import { DataProvider } from './context/DataProvider';
-import {Sidebar} from "./components/sidebar/Sidebar";
+import {Sidebar} from "./components/sidebar + header/Sidebar";
 import { Notes } from './components/notes/Notes';
 import { DeletedNotes } from './components/notes/deletedNotes/DeletedNotes';
 import { ArchivedNotes } from './components/notes/arhivedNotes/ArchivedNotes';
-import {AlertComponent} from './components/Alert';
+import {AlertComponent} from './components/alert/Alert';
 
 
 

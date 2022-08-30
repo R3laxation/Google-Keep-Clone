@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Alert, Stack, styled} from "@mui/material";
-import {DataContext} from "../context/DataProvider";
+import {DataContext} from "../../context/DataProvider";
 
 
 const CustomAlert = styled(Alert)`

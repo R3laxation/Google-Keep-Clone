@@ -11,7 +11,7 @@ import {
 import {StyledCard} from "../note/Note";
 import {NoteContent} from "../noteContent/NoteContent";
 import {NoteAction} from '../noteAction/NoteAction';
-import {useModalHook} from "../../../context/useModalHook";
+import {useModalHook} from "../../../utils/useModalHook/useModalHook";
 import {EditModal} from "../../modals/EditModal";
 
 export const ArchivedNote = ({note}: NotePropsType) => {

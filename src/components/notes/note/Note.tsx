@@ -11,7 +11,7 @@ import {EditModal} from "../../modals/EditModal";
 import {NoteContent} from "../noteContent/NoteContent";
 import {NoteAction} from "../noteAction/NoteAction";
 import {ArchiveOutlined as Archive, DeleteOutlined as Delete, EditOutlined as Edit} from '@mui/icons-material';
-import {useModalHook} from "../../../context/useModalHook";
+import {useModalHook} from "../../../utils/useModalHook/useModalHook";
 
 export const StyledCard = styled(Card)`
   width: 240px;
